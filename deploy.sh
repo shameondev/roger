@@ -14,12 +14,12 @@ timedatectl set-timezone Europe/Moscow
 
 # configure static ip
 rm -rf /etc/network/interfaces
-cp /moot/deploy/src/interfaces /etc/network/
+cp /root/deploy/src/interfaces /etc/network/
 ifup enp0s8
 
 # configure ssh
 rm -rf /etc/ssh/sshd_config
-cp /moot/deploy/src/sshd_config /etc/ssh/
+cp /root/deploy/src/sshd_config /etc/ssh/
 
 # configure apache2 with SSL requirements
 openssl   req   -x509   -nodes   -days   365   -newkey   rsa:2048   -keyout   /etc/ssl/private/apache-selfsigned.key   -out /etc/ssl/certs/apache-selfsigned.crt  -subj "/C=RU/ST=Moscow/L=Moscow/O=21/OU=school/CN=192.168.56.2"
