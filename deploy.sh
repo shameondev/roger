@@ -3,10 +3,9 @@
 # getting system updates
 apt-get update -y
 apt-get upgrade -y
-apt-get install sudo vim portsentry ufw fail2ban apache2 mailtils git ntp -y
+apt-get install sudo vim portsentry ufw fail2ban apache2 mailutils git ntp -y
 
 # making alouser sudoer
-adduser --disabled-password --gecos "" alouser
 rm -rf /etc/sudoers
 cp /root/deploy/src/sudoers /etc/
 
@@ -14,12 +13,12 @@ cp /root/deploy/src/sudoers /etc/
 timedatectl set-timezone Europe/Moscow
 
 # configure static ip
-fm -rf /etc/network/interfaces
+rm -rf /etc/network/interfaces
 cp /moot/deploy/src/interfaces /etc/network/
 ifup enp0s8
 
 # configure ssh
-fm -rf /etc/ssh/sshd_config
+rm -rf /etc/ssh/sshd_config
 cp /moot/deploy/src/sshd_config /etc/ssh/
 
 # configure apache2 with SSL requirements
@@ -56,7 +55,7 @@ cp /root/deploy/src/portsentry.conf /etc/portsentry/
 
 # configure crontab
 cp /root/deploy/src/update_script.sh /etc/cron.d/
-cp /root/deploy/src/crontab_checker.sh /etc/cron.d/
+cp /root/deploy/src/crontab_changes.sh /etc/cron.d/
 rm -rf /etc/crontab
 cp /root/deploy/src/crontab /etc/
 
